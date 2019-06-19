@@ -1,0 +1,26 @@
+<div class="container custom-container">
+  <div class="col-md-12">
+    
+    <h3 class="mb-3 text-center">User's Posts</h3>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">All Posts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of UserPost">
+          <td>{{post.title}}</td>
+        </tr>
+        <tr *ngFor="let post of UserPost">
+          <td>{{post.body}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style = "margin-top: 5px">
+      <input type="button class="btn btn-primary" (click)="onBackButtonClick()" value = "Back to list""">
+    </div>
+    
+  </div>
+</div>
