@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../shared/user.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'users-list',
@@ -9,29 +10,38 @@ import { UserService } from "../shared/user.service";
 export class UserlistComponent implements OnInit {
 
   User: any = [];
+  Post: any = [];
 
   constructor(
-    public restApi: UserService
+    public userService: UserService,
+    public router: Router
   ) { }
 
   ngOnInit() {
-    this.loadUsers()
+    this.loadUsers();
   }
 
   // Get employees list
   loadUsers() {
-    return this.restApi.getUsersList().subscribe((data: {}) => {
+    return this.userService.getUsersList().subscribe((data: {}) => {
       this.User = data;
+    })
+    
+  }
+
+  loadPosts(id){
+    return this.userService.getUser(id).subscribe((data: {}) => {
+      this.Post = data;
     })
   }
 
-  // Delete employee
- loadUser(id) {
+//  loadUser(id) {
     
-      this.restApi.getUser(id).subscribe(data => {
-        this.loadUsers()
-      })
+//       return this.userService.getUser(id).subscribe((data) => {
+//         this.router.navigate(['/user-details/:'+id]);
+
+//       })
     
-  }  
+//   }  
 
 }

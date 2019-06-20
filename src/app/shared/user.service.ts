@@ -34,13 +34,23 @@ export class UserService {
 //   }
 
     // HttpClient API get() method => Fetch employee
-    getUser(id): Observable<UserPost[]> {
-      return this.http.get<UserPost[]>(this.serviceUrl2 + 'userId=' + id)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      )
+    // getUser(id): Observable<UserPost[]> {
+    //   return this.http.get<UserPost[]>(this.serviceUrl2 + 'userId=' + id)
+    //   .pipe(
+    //     retry(1),
+    //     catchError(this.handleError)
+    //   )
+    // } 
+
+    getUser(id): Observable<UserPost[]> {      
+      return this.http.get<UserPost[]>(this.serviceUrl2 + 'userId=' + id);
+  
     } 
+
+    // getUser(id): Observable<User> {      
+    //   return this.http.get<User>(this.serviceUrl + '/' + id);
+  
+    // } 
 
   // Error handling 
   handleError(error) {

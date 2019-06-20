@@ -6,6 +6,7 @@ import 'hammerjs';
 
 // Routing module for router service
 import { AppRoutingModule } from './app-routing.module';
+// import { RouterModule, Routes} from '@angular/router';
 import { UsertableComponent } from './usertable/usertable.component';
 import { UserlistComponent } from './users-list/users-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
