@@ -29,11 +29,12 @@ export class UserlistComponent implements OnInit {
     
   }
 
-  loadPosts(id){
-    return this.userService.getUser(id).subscribe((data: {}) => {
-      this.Post = data;
-    })
-  }
+  // loadPosts(id){
+  //   // this.router.navigateByUrl('/user-details/'+id);
+  //   return this.userService.getUser(id).subscribe((data: {}) => {
+  //     this.Post = data;
+  //   })
+  // }
 
 //  loadUser(id) {
     

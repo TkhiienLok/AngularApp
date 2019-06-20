@@ -41,11 +41,15 @@ export class UserService {
     //     catchError(this.handleError)
     //   )
     // } 
-
-    getUser(id): Observable<UserPost[]> {      
+    getUser(id): Observable<User>{
+      return this.http.get<User>(this.serviceUrl + '/' + id);
+    }
+    loadPosts(id): Observable<UserPost[]> {      
       return this.http.get<UserPost[]>(this.serviceUrl2 + 'userId=' + id);
   
     } 
+
+    
 
     // getUser(id): Observable<User> {      
     //   return this.http.get<User>(this.serviceUrl + '/' + id);

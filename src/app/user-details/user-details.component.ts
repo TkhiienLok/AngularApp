@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserPost, User } from '../shared/user.model';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-user-details',
@@ -15,9 +16,9 @@ export class UserDetailsComponent implements OnInit {
   // postsData = new UserPostsSource(this.userService, this.actRoute);
   // id = this.actRoute.snapshot.params['id'];
   id:string;
-  userData: any = {};
+  userData: any = [];
   userposts:UserPost[];
-  user:User;
+  user:any = {};
 
   constructor(
     public userService: UserService,
@@ -31,23 +32,21 @@ export class UserDetailsComponent implements OnInit {
   }
   
   ngOnInit() { 
-    this.id = this.actRoute.snapshot.params['id'];
-    // this.userService.getUser(this.id).subscribe((data: {}) => {
-    //   this.userData = data;
-    //   this.router.navigate(['/user-details/:id'])
-    // })
-    // this.loadUser(this.id)
-    this.userService.getUser(this.id).subscribe((data: {}) => {
-      this.userData = data;
-      console.log(Object.keys(data));
-      })
+    let id:string = this.actRoute.snapshot.params['id'];
+    this.userService.getUser(id).subscribe((data:{}) =>{
+      this.user = data;
+    });
+    this.loadUser(id);   
+      
   }
 
   loadUser(id) {
-    return this.userService.getUser(id).subscribe((data: {}) => {
-    this.userData = data;
-    // this.router.navigate(['/user-details'])
-    })
+    return this.userService.loadPosts(id).subscribe(
+        (data: {}) => this.userData = data,
+        (error)=>{
+          console.log(error);
+        }
+        )
     }
 
   // Update employee data
@@ -60,7 +59,7 @@ export class UserPostsSource extends DataSource<any> {
     super();
   }
   connect(): Observable<UserPost[]>{
-    return this.userService.getUser(this.id);
+    return this.userService.loadPosts(this.id);
   }
   disconnect() {}
 }

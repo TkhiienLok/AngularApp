@@ -18,7 +18,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let user of User">
-            <td><a class="" [routerLink]="['/user-details', user.id ]" (click)="loadPosts(user.id)">{{user.id}}</a></td>
+            <td><a class="" [routerLink]="['/user-details', user.id ]" >{{user.id}}</a></td>
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td>{{user.username}}</td>
@@ -26,13 +26,9 @@
           </tr>
         </tbody>
       </table>
-    <!-- <router-outlet></router-outlet> -->
+
     </div>
-  <div>
-    <ul *ngFor="let post of Post">
-      <li>{{post.title}}</li>
-    </ul>
-  </div>
+
 
   </div>
 

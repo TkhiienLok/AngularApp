@@ -6,7 +6,7 @@ import 'hammerjs';
 
 // Routing module for router service
 import { AppRoutingModule } from './app-routing.module';
-// import { RouterModule, Routes} from '@angular/router';
+import './app-routing.module';
 import { UsertableComponent } from './usertable/usertable.component';
 import { UserlistComponent } from './users-list/users-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +16,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { MatTableModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http'; // HttpClient module for RESTful API
 import { UserService } from './shared/user.service';
+
 
 @NgModule({
   declarations: [
