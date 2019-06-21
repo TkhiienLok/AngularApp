@@ -11,9 +11,14 @@ h3 {
     padding: 5px;
 }
 p{  
-    padding: 5px;  
+    padding: 5px; 
+    margin-top: 2px; 
     }
 
 .mat-list-item {
-    margin: 20px;
+    margin: 15px;
+}
+li{
+    margin-top: 20px;
+    list-style: none;
 }
