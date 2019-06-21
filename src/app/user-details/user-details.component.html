@@ -21,8 +21,8 @@
 <h3 class="mb-3 text-center" *ngIf="user">{{user.name}}'s Posts</h3>
 <mat-list dense>
     <mat-list-item *ngFor="let post of userData">
-      <p></p>
       <h3>{{post.title}}</h3>
+      <p></p>
       <p>{{post.body}}</p>
     </mat-list-item>
     
