@@ -12,10 +12,13 @@
   "postinstall": "ng build --aot --prod",
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-angular": "^0.800.3",
     "@angular/animations": "~8.0.1",
     "@angular/cdk": "^8.0.1",
+    "@angular/cli": "~8.0.3",
     "@angular/common": "~8.0.1",
     "@angular/compiler": "~8.0.1",
+    "@angular/compiler-cli": "^8.0.1",
     "@angular/core": "~8.0.1",
     "@angular/forms": "~8.0.1",
     "@angular/http": "~7.2.15",
@@ -26,8 +29,11 @@
     "@types/lowdb": "^1.0.9",
     "bootstrap": "^4.3.1",
     "core-js": "^3.1.4",
+    "express": "^4.17.1",
     "hammerjs": "^2.0.8",
+    "path": "^0.12.7",
     "rxjs": "~6.5.2",
+    "typescript": "^3.4.5",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
@@ -39,6 +45,7 @@
     "@types/jasminewd2": "~2.0.6",
     "@types/node": "~12.0.8",
     "codelyzer": "~5.1.0",
+    "enhanced-resolve": "^3.3.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^4.1.0",
@@ -55,5 +62,9 @@
   "main": "index.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "engine": {
+    "node": "10.16.0",
+    "npm": "6.9.0"
+  }
 }
