@@ -17,10 +17,11 @@
     
   </div>
 </div> -->
-
+<div class="container custom-container">
 <h3 class="mb-3 text-center" *ngIf="user">{{user.name}}'s Posts</h3>
 <mat-list dense>
     <mat-list-item *ngFor="let post of userData">
+      <p></p>
       <h3>{{post.title}}</h3>
       <p>{{post.body}}</p>
     </mat-list-item>
@@ -28,4 +29,6 @@
 </mat-list>
 <div style = "margin-top: 5px">
     <input type="button" class="btn btn-primary" (click)="onBackButtonClick()" value = "Back to list">
+</div>
+
 </div>
