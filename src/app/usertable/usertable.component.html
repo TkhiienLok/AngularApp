@@ -1,9 +1,5 @@
-<div>
+<div *ngIf = "dataSource">
     <mat-table #table [dataSource] = "dataSource">
-			<ng-container matColumnDef=""> 
-				<mat-header-cell> #</mat-header-cell> 
-				<mat-cell><i>mode_edit</i></mat-cell> 
-			</ng-container>
 	    <ng-container matColumnDef = "id">
 		    <mat-header-cell *mat-header-cell>ID</mat-header-cell>
 			<mat-cell *matCellDef="let user">{{user.id}}</mat-cell>

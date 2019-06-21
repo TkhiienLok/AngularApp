@@ -1,19 +1,32 @@
-<div class="container custom-container">
+<!-- <div class="container custom-container">
   <div class="col-md-12">
     
     <h3 class="mb-3 text-center" *ngIf="user">{{user.name}}'s Posts</h3>
     <div></div>
     <ul *ngFor="let post of userData">
-        <li>
-        <!-- <tr *ngIf="userData"> -->
-          <span><b>{{post.title}}</b></span>
-        
-          <span>{{post.body}}</span>
-        </li>
-      </ul>
+      <li>
+      
+        <span><b>{{post.title}}</b></span>
+      
+        <span>{{post.body}}</span>
+      </li>
+    </ul>
     <div style = "margin-top: 5px">
       <input type="button" class="btn btn-primary" (click)="onBackButtonClick()" value = "Back to list">
     </div>
     
   </div>
+</div> -->
+
+<h3 class="mb-3 text-center" *ngIf="user">{{user.name}}'s Posts</h3>
+<mat-list dense>
+    <mat-list-item *ngFor="let post of userData">
+      <h3>{{post.title}}</h3>
+      </br>
+      <p>{{post.body}}</p>
+    </mat-list-item>
+    
+</mat-list>
+<div style = "margin-top: 5px">
+    <input type="button" class="btn btn-primary" (click)="onBackButtonClick()" value = "Back to list">
 </div>

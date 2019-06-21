@@ -17,11 +17,11 @@ export class UsertableComponent implements OnInit {
 	// dataSource: any=[];
 	
 	// dataSource: any =[];
-	users:any=[];
+	users:User[];
 	// dataSource:UserDataSource;
 	public dataSource = new MatTableDataSource();
-	displayedColumns = ["id", "name", "username", "email", "website", "company"]
-
+	public displayedColumns = ["id", "name", "username", "email", "website", "company"]
+   
   constructor(public userService: UserService) { }
   
 
@@ -29,12 +29,18 @@ export class UsertableComponent implements OnInit {
 	// this.dataSource = new UserDataSource(this.userService);
 	// this.users = this.dataSource.connect();
 	// console.log(this.users);
+	
 	this._getElementData();
+	// console.log(this.dataSource.data);
+
+	
 
 }
 private _getElementData(): void {
 	this.userService.getUsersList().subscribe(res => {
 	  this.dataSource.data = res;
+	  this.users = res;
+	  console.log(this.dataSource.data);
 	});
   }
 }

@@ -32,6 +32,7 @@ export class UserDetailsComponent implements OnInit {
   }
   
   ngOnInit() { 
+    //loading user
     let id:string = this.actRoute.snapshot.params['id'];
     this.userService.getUser(id).subscribe((data:{}) =>{
       this.user = data;
@@ -39,7 +40,7 @@ export class UserDetailsComponent implements OnInit {
     this.loadUser(id);   
       
   }
-
+//loading posts
   loadUser(id) {
     return this.userService.loadPosts(id).subscribe(
         (data: {}) => this.userData = data,
@@ -52,14 +53,14 @@ export class UserDetailsComponent implements OnInit {
   // Update employee data
 }
 
-export class UserPostsSource extends DataSource<any> {
-  id = this.actRoute.snapshot.params['id'];
-  constructor(private userService: UserService,
-              public actRoute: ActivatedRoute,){
-    super();
-  }
-  connect(): Observable<UserPost[]>{
-    return this.userService.loadPosts(this.id);
-  }
-  disconnect() {}
-}
+// export class UserPostsSource extends DataSource<any> {
+//   id = this.actRoute.snapshot.params['id'];
+//   constructor(private userService: UserService,
+//               public actRoute: ActivatedRoute,){
+//     super();
+//   }
+//   connect(): Observable<UserPost[]>{
+//     return this.userService.loadPosts(this.id);
+//   }
+//   disconnect() {}
+// }
