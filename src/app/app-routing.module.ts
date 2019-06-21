@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserlistComponent } from './users-list/users-list.component';
-
+import { UsertableComponent } from './usertable/usertable.component';
 
 const routes: Routes = [
   { path: 'users',  component: UserlistComponent},

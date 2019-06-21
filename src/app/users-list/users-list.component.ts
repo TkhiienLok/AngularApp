@@ -19,6 +19,7 @@ export class UserlistComponent implements OnInit {
 
   ngOnInit() {
     this.loadUsers();
+
   }
 
   // Get employees list
