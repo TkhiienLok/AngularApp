@@ -34,6 +34,5 @@ export class UserlistComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.subscription.unsubscribe()
-    console.log('Bye');
   }
 }
