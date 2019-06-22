@@ -1,6 +1,6 @@
 import * as userActions from '../actions/user.actions';
 
-import { AppState } from '../../shared/app.state';
+import { AppState } from '../../models/app.state';
 
 export const initialState: AppState = {
   users: [],

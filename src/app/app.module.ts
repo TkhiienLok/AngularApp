@@ -13,7 +13,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UsertableComponent } from './usertable/usertable.component'; //works
 import { MatTableModule, MatListModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http'; 
-import { UserService } from './shared/user.service';
+import { UserService } from './service/user.service';
 
 import { StoreModule } from '@ngrx/store';
 import { UserReducer } from './store/reducers/user.reducer';

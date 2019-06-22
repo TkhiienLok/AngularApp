@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserService } from '../shared/user.service';
-import { User } from '../shared/user.model';
+import { UserService } from '../service/user.service';
+import { User } from '../models/user.model';
 import { MatTableDataSource } from '@angular/material';
 import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '../shared/app.state';
+import { AppState } from '../models/app.state';
 import * as userActions from '../store/actions/user.actions';
 
 @Component({

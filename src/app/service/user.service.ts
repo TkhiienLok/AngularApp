@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
-import { User } from '../shared/user.model';
-import { UserPost } from '../shared/user.model';
+import { User } from '../models/user.model';
+import { UserPost } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'

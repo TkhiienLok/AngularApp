@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserService } from "../shared/user.service";
+import { UserService } from "../service/user.service";
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserPost, User } from '../shared/user.model';
+import { UserPost, User } from '../models/user.model';
 import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '../shared/app.state';
+import { AppState } from '../models/app.state';
 import * as UserActions from '../store/actions/user.actions';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
-import { User } from '../../shared/user.model';
-import { UserPost } from '../../shared/user.model';
+import { User } from '../../models/user.model';
+import { UserPost } from '../../models/user.model';
 
 export const LOAD_USERS = '[User Table] Load Users';
 export const LOAD_USERS_SUCCESS = '[User Table] Load Users Success';
