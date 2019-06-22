@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from "../shared/user.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserPost, User } from '../shared/user.model';
-import { DataSource } from '@angular/cdk/collections';
-import { Observable } from 'rxjs';
-import { error } from '@angular/compiler/src/util';
-
+import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../shared/app.state';
 import * as UserActions from '../store/actions/user.actions';
@@ -16,23 +13,20 @@ import * as UserActions from '../store/actions/user.actions';
   styleUrls: ['./user-details.component.css']
 })
 
-export class UserDetailsComponent implements OnInit {
-  
-  // userPosts: any = [];
-  // user:any = {};
+export class UserDetailsComponent implements OnInit, OnDestroy {
 
   user$:Observable<any>;
   user: User[];
   userPosts$:Observable<any>;
   userPosts: UserPost[];
-
-
+  subscription:Subscription;
 
   constructor(
     public userService: UserService,
     public actRoute: ActivatedRoute,
     public router: Router,
-    private store: Store<AppState>) { 
+    private store: Store<AppState>
+    ) { 
       this.userPosts$ = this.store.select('applicationState'); 
   }
    
@@ -41,31 +35,21 @@ export class UserDetailsComponent implements OnInit {
   }
   
   ngOnInit() { 
-    //loading user
     let id:string = this.actRoute.snapshot.params['id'];
-    this.loadUser(id);
-    this.userPosts$.subscribe((state:AppState) => {
-      this.userPosts = state.posts;
+    this.loadUser(id);  //loading user 
+    this.subscription = this.userPosts$.subscribe((state:AppState) => {
+      this.userPosts = state.posts; //loading user posts
     });
-
-    
-    // this.userService.getUser(id).subscribe((data:{}) =>{
-    //   this.user = data;
-    // });
-    // this.loadUser(id);   
       
   }
 //loading posts
   loadUser(id) {
-
     this.store.dispatch(new UserActions.loadPostsAction());
-    // return this.userService.loadPosts(id).subscribe(
-    //     (data: {}) => this.userPosts = data,
-    //     (error)=>{
-    //       console.log(error);
-    //     }
-    //     )
-    }
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe()
+  }
 
  
 }
