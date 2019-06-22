@@ -17,8 +17,6 @@ import * as UserActions from '../store/actions/user.actions';
 })
 
 export class UserDetailsComponent implements OnInit {
-  // postsData = new UserPostsSource(this.userService, this.actRoute);
-  // id = this.actRoute.snapshot.params['id'];
   
   // userPosts: any = [];
   // user:any = {};
@@ -69,17 +67,5 @@ export class UserDetailsComponent implements OnInit {
     //     )
     }
 
-  // Update employee data
+ 
 }
-
-// export class UserPostsSource extends DataSource<any> {
-//   id = this.actRoute.snapshot.params['id'];
-//   constructor(private userService: UserService,
-//               public actRoute: ActivatedRoute,){
-//     super();
-//   }
-//   connect(): Observable<UserPost[]>{
-//     return this.userService.loadPosts(this.id);
-//   }
-//   disconnect() {}
-// }

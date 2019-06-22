@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "postinstall": "ng build --prod",
+ 
   "private": true,
   "dependencies": {
     "@angular-devkit/build-angular": "^0.800.3",
