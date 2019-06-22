@@ -1,27 +1,27 @@
 <div *ngIf = "dataSource">
     <mat-table #table [dataSource] = "dataSource">
 	    <ng-container matColumnDef = "id">
-		    <mat-header-cell *mat-header-cell>ID</mat-header-cell>
-			<mat-cell *matCellDef="let user">{{user.id}}</mat-cell>
+		    <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+			<mat-cell *matCellDef="let user"><a [routerLink]="['/user-details', user.id ]" >{{user.id}}</a></mat-cell>
 		</ng-container>
 		<ng-container matColumnDef = "name">
-		    <mat-header-cell *mat-header-cell>Name</mat-header-cell>
+		    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
 			<mat-cell *matCellDef="let user">{{user.name}}</mat-cell>
 		</ng-container>
 		<ng-container matColumnDef = "username">
-		    <mat-header-cell *mat-header-cell>Username</mat-header-cell>
+		    <mat-header-cell *matHeaderCellDef>Username</mat-header-cell>
 			<mat-cell *matCellDef="let user">{{user.username}}</mat-cell>
 		</ng-container>
 		<ng-container matColumnDef = "email">
-		    <mat-header-cell *mat-header-cell>Email</mat-header-cell>
+		    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
 			<mat-cell *matCellDef="let user">{{user.email}}</mat-cell>
 		</ng-container>
 		<ng-container matColumnDef = "website">
-		    <mat-header-cell *mat-header-cell>Website</mat-header-cell>
+		    <mat-header-cell *matHeaderCellDef>Website</mat-header-cell>
 			<mat-cell *matCellDef="let user">{{user.website}}</mat-cell>
 		</ng-container>
 		<ng-container matColumnDef = "company">
-		    <mat-header-cell *mat-header-cell>Company</mat-header-cell>
+		    <mat-header-cell *matHeaderCellDef>Company</mat-header-cell>
 			<mat-cell *matCellDef="let user">{{user.company.name}}</mat-cell>
 		</ng-container>
 		<mat-header-row *matHeaderRowDef = "displayedColumns"></mat-header-row>
