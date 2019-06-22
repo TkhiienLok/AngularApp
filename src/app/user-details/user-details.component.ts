@@ -6,6 +6,10 @@ import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 import { error } from '@angular/compiler/src/util';
 
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../shared/app.state';
+import * as UserActions from '../store/actions/user.actions';
+
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
@@ -15,16 +19,23 @@ import { error } from '@angular/compiler/src/util';
 export class UserDetailsComponent implements OnInit {
   // postsData = new UserPostsSource(this.userService, this.actRoute);
   // id = this.actRoute.snapshot.params['id'];
-  id:string;
-  userData: any = [];
-  userposts:UserPost[];
-  user:any = {};
+  
+  // userPosts: any = [];
+  // user:any = {};
+
+  user$:Observable<any>;
+  user: User[];
+  userPosts$:Observable<any>;
+  userPosts: UserPost[];
+
+
 
   constructor(
     public userService: UserService,
     public actRoute: ActivatedRoute,
-    public router: Router
-  ) { 
+    public router: Router,
+    private store: Store<AppState>) { 
+      this.userPosts$ = this.store.select('applicationState'); 
   }
    
   onBackButtonClick(): void{
@@ -34,20 +45,28 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit() { 
     //loading user
     let id:string = this.actRoute.snapshot.params['id'];
-    this.userService.getUser(id).subscribe((data:{}) =>{
-      this.user = data;
+    this.loadUser(id);
+    this.userPosts$.subscribe((state:AppState) => {
+      this.userPosts = state.posts;
     });
-    this.loadUser(id);   
+
+    
+    // this.userService.getUser(id).subscribe((data:{}) =>{
+    //   this.user = data;
+    // });
+    // this.loadUser(id);   
       
   }
 //loading posts
   loadUser(id) {
-    return this.userService.loadPosts(id).subscribe(
-        (data: {}) => this.userData = data,
-        (error)=>{
-          console.log(error);
-        }
-        )
+
+    this.store.dispatch(new UserActions.loadPostsAction());
+    // return this.userService.loadPosts(id).subscribe(
+    //     (data: {}) => this.userPosts = data,
+    //     (error)=>{
+    //       console.log(error);
+    //     }
+    //     )
     }
 
   // Update employee data

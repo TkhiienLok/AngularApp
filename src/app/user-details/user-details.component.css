@@ -3,12 +3,9 @@
 h3 { 
     display: block;
     font-size: 1.17em;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    margin-left: 0;
-    margin-right: 0;
-    font-weight: bold;
+    font-weight: bold; 
     padding: 5px;
+    padding-top: 20px;
 }
 p{  
     padding: 5px; 
@@ -16,9 +13,12 @@ p{
     }
 
 .mat-list-item {
-    margin: 15px;
+    margin: 35px;
 }
 li{
     margin-top: 20px;
     list-style: none;
+}
+div {
+    margin-top: 25px;
 }

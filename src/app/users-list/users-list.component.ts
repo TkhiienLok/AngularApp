@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../shared/user.service";
-import { Router } from '@angular/router';
+import { User } from '../shared/user.model';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../shared/app.state';
+import * as userActions from '../store/actions/user.actions';
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'users-list',
@@ -9,41 +13,31 @@ import { Router } from '@angular/router';
 })
 export class UserlistComponent implements OnInit {
 
-  User: any = [];
-  Post: any = [];
+  // users$: any = [];
+  users$:Observable<any>;
+  users: User[];
 
   constructor(
-    public userService: UserService,
-    public router: Router
-  ) { }
+    // public userService: UserService
+    private store: Store<AppState>) { 
+    this.users$ = this.store.select('applicationState');
+    }
 
   ngOnInit() {
     this.loadUsers();
+    this.users$.subscribe((state:AppState) => this.users = state.users);
 
   }
 
   // Get employees list
   loadUsers() {
-    return this.userService.getUsersList().subscribe((data: {}) => {
-      this.User = data;
-    })
-    
+    // return this.userService.getUsersList().subscribe((data: {}) => {
+    //   this.users = data;
+    // })
+  //  this.store.dispatch({ type: '[User Table] Load Users' });
+
+  this.store.dispatch(new userActions.loadUsersAction());
   }
 
-  // loadPosts(id){
-  //   // this.router.navigateByUrl('/user-details/'+id);
-  //   return this.userService.getUser(id).subscribe((data: {}) => {
-  //     this.Post = data;
-  //   })
-  // }
-
-//  loadUser(id) {
-    
-//       return this.userService.getUser(id).subscribe((data) => {
-//         this.router.navigate(['/user-details/:'+id]);
-
-//       })
-    
-//   }  
 
 }

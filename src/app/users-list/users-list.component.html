@@ -2,7 +2,7 @@
 
  
   <!-- Employees list table, it hides when there is no employee -->
-  <div *ngIf="User.length !== 0">
+  <div *ngIf="users.length !== 0">
     <h3 class="mb-3 text-center">Users List</h3>
 
     <div class="col-md-12">
@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of User">
+          <tr *ngFor="let user of users">
             <td><a class="" [routerLink]="['/user-details', user.id ]" >{{user.id}}</a></td>
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>

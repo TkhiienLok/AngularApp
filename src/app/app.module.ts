@@ -2,12 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
-// import { AngularFireModule } from 'angularfire2';
-// import { AngularFireDatabaseModule } from 'angularfire2/database';
-// import { DatePipe } from '@angular/common';
-// import { environment } from '../environments/environment';
-import { CdkTableModule } from '@angular/cdk/table';
-
 
 import 'hammerjs';
 
@@ -25,6 +19,11 @@ import { MatTableModule,
 import { HttpClientModule } from '@angular/common/http'; // HttpClient module for RESTful API
 import { UserService } from './shared/user.service';
 
+import { StoreModule } from '@ngrx/store';
+import { UserReducer } from './store/reducers/user.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './store/effects/users.effects';
+
 const material = [ MatTableModule,
                    MatListModule]
 @NgModule({
@@ -41,8 +40,10 @@ const material = [ MatTableModule,
     BrowserAnimationsModule,
     MatTableModule,
     HttpClientModule,
-    CdkTableModule,
-    MatListModule
+    MatListModule,
+    StoreModule.forRoot({ applicationState:UserReducer}),
+    EffectsModule.forRoot([UserEffects]),
+
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
