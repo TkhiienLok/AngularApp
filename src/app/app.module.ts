@@ -36,6 +36,7 @@ import { UserEffects } from './store/effects/users.effects';
     MatListModule,
     StoreModule.forRoot({ applicationState:UserReducer}),
     EffectsModule.forRoot([UserEffects]),
+    StoreModule.forFeature('users', UserReducer)
 
   ],
   providers: [UserService],
