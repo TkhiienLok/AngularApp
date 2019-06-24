@@ -1,6 +1,5 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { AppState } from '../../models/app.state'; 
-import { UserPost, User } from '../../models/user.model';
 
 
 export const selectedUser = (state: AppState) => state.selectedUser;
