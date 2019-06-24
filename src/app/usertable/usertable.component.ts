@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../models/app.state';
 import * as userActions from '../store/actions/user.actions';
+import { getUsersState } from '../store/selectors/selectors';
 
 @Component({
   selector: 'usertable',
@@ -18,20 +19,20 @@ export class UsertableComponent implements OnInit, OnDestroy {
 	public displayedColumns = ["id", "name", "username", "email", "website", "company"];
 
 	users$:Observable<any>;
-	users: User[];
+	users: any = [];
 	subscription: Subscription;
    
   constructor(
 	  public userService: UserService,
 	  private store: Store<AppState>) { 
-		this.users$ = this.store.select('applicationState');
+		this.users$ = this.store.select(getUsersState); 
 		} 
 
   ngOnInit() {
 	this.loadUsers()
 	this.subscription = this.users$.subscribe((state:AppState) => {
-		this.users = state.users;
-		this.dataSource.data = state.users;
+		this.users = state;
+		this.dataSource.data = this.users;
 	});
 	
   }

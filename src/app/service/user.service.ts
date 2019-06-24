@@ -35,13 +35,12 @@ export class UserService {
     catchError(this.handleError))
   }
   loadPosts(id): Observable<UserPost[]> {      
-    return this.http.get<UserPost[]>(this.serviceUrl2 + 'userId=' + id)
+    return this.http.get<UserPost[]>(this.serviceUrl2 + 'userId='+ id)
     .pipe(
     retry(1),
     catchError(this.handleError))
 
   } 
-
 
   // Error handling 
   handleError(error) {

@@ -11,6 +11,7 @@ export class User {
 }
 
 export class UserPost {	
+	userId:number;
 	title: string;
 	body: string;
 	

@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from "../service/user.service";
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserPost, User } from '../models/user.model';
 import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../models/app.state';
 import * as UserActions from '../store/actions/user.actions';
+import { getUserState, getPostsState,selectedUserPosts } from '../store/selectors/selectors';
 
 @Component({
   selector: 'app-user-details',
@@ -16,10 +16,11 @@ import * as UserActions from '../store/actions/user.actions';
 export class UserDetailsComponent implements OnInit, OnDestroy {
 
   user$:Observable<any>;
-  user: User[];
+  user: any;
   userPosts$:Observable<any>;
-  userPosts: UserPost[];
+  userPosts: any;
   subscription:Subscription;
+  id:number;
 
   constructor(
     public userService: UserService,
@@ -27,7 +28,8 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     public router: Router,
     private store: Store<AppState>
     ) { 
-      this.userPosts$ = this.store.select('applicationState'); 
+      this.userPosts$ = this.store.select(getPostsState); 
+      this.user$ = this.store.select(getUserState); 
   }
    
   onBackButtonClick(): void{
@@ -35,21 +37,23 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   }
   
   ngOnInit() { 
-    let id:string = this.actRoute.snapshot.params['id'];
-    this.loadUser(id);  //loading user 
+    this.id = this.actRoute.snapshot.params['id'];
+
+    this.store.dispatch(new UserActions.getUserAction(this.id));
+    this.subscription = this.user$.subscribe((state:AppState) => {
+      this.user = state;      
+    })
+    
+  this.subscription.unsubscribe();
+
+    this.store.dispatch(new UserActions.loadPostsAction(this.id));
     this.subscription = this.userPosts$.subscribe((state:AppState) => {
-      this.userPosts = state.posts; //loading user posts
-    });
-      
-  }
-//loading posts
-  loadUser(id) {
-    this.store.dispatch(new UserActions.loadPostsAction());
+      this.userPosts = state;
+    })
   }
 
   ngOnDestroy(){
     this.subscription.unsubscribe()
   }
-
  
 }
