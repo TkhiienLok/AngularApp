@@ -5,7 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../models/app.state';
 import * as UserActions from '../store/actions/user.actions';
-import { getUserState, getPostsState,selectedUserPosts } from '../store/selectors/selectors';
+import { getUserState, getPostsState } from '../store/selectors/selectors';
 
 @Component({
   selector: 'app-user-details',
