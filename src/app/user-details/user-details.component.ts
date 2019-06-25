@@ -1,14 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from "../shared/user.service";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { UserService } from "../service/user.service";
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserPost, User } from '../shared/user.model';
-import { DataSource } from '@angular/cdk/collections';
-import { Observable } from 'rxjs';
-import { error } from '@angular/compiler/src/util';
-
+import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '../shared/app.state';
+import { AppState } from '../models/app.state';
 import * as UserActions from '../store/actions/user.actions';
+import { getUserState, getPostsState } from '../store/selectors/selectors';
 
 @Component({
   selector: 'app-user-details',
@@ -16,26 +13,23 @@ import * as UserActions from '../store/actions/user.actions';
   styleUrls: ['./user-details.component.css']
 })
 
-export class UserDetailsComponent implements OnInit {
-  // postsData = new UserPostsSource(this.userService, this.actRoute);
-  // id = this.actRoute.snapshot.params['id'];
-  
-  // userPosts: any = [];
-  // user:any = {};
+export class UserDetailsComponent implements OnInit, OnDestroy {
 
   user$:Observable<any>;
-  user: User[];
+  user: any;
   userPosts$:Observable<any>;
-  userPosts: UserPost[];
-
-
+  userPosts: any;
+  subscription:Subscription;
+  id:number;
 
   constructor(
     public userService: UserService,
     public actRoute: ActivatedRoute,
     public router: Router,
-    private store: Store<AppState>) { 
-      this.userPosts$ = this.store.select('applicationState'); 
+    private store: Store<AppState>
+    ) { 
+      this.userPosts$ = this.store.select(getPostsState); 
+      this.user$ = this.store.select(getUserState); 
   }
    
   onBackButtonClick(): void{
@@ -43,43 +37,23 @@ export class UserDetailsComponent implements OnInit {
   }
   
   ngOnInit() { 
-    //loading user
-    let id:string = this.actRoute.snapshot.params['id'];
-    this.loadUser(id);
-    this.userPosts$.subscribe((state:AppState) => {
-      this.userPosts = state.posts;
-    });
+    this.id = this.actRoute.snapshot.params['id'];
 
+    this.store.dispatch(new UserActions.getUserAction(this.id));
+    this.subscription = this.user$.subscribe((state:AppState) => {
+      this.user = state;      
+    })
     
-    // this.userService.getUser(id).subscribe((data:{}) =>{
-    //   this.user = data;
-    // });
-    // this.loadUser(id);   
-      
+  this.subscription.unsubscribe();
+
+    this.store.dispatch(new UserActions.loadPostsAction(this.id));
+    this.subscription = this.userPosts$.subscribe((state:AppState) => {
+      this.userPosts = state;
+    })
   }
-//loading posts
-  loadUser(id) {
 
-    this.store.dispatch(new UserActions.loadPostsAction());
-    // return this.userService.loadPosts(id).subscribe(
-    //     (data: {}) => this.userPosts = data,
-    //     (error)=>{
-    //       console.log(error);
-    //     }
-    //     )
-    }
-
-  // Update employee data
+  ngOnDestroy(){
+    this.subscription.unsubscribe()
+  }
+ 
 }
-
-// export class UserPostsSource extends DataSource<any> {
-//   id = this.actRoute.snapshot.params['id'];
-//   constructor(private userService: UserService,
-//               public actRoute: ActivatedRoute,){
-//     super();
-//   }
-//   connect(): Observable<UserPost[]>{
-//     return this.userService.loadPosts(this.id);
-//   }
-//   disconnect() {}
-// }
