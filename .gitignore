@@ -61,6 +61,7 @@ typings/
 /myvenv
 .env
 .env.test
+/myvenv
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
