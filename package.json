@@ -26,6 +26,7 @@
     "@angular/platform-browser": "~8.0.1",
     "@angular/platform-browser-dynamic": "~8.0.1",
     "@angular/router": "~8.0.1",
+    "@ngrx/effects": "^8.0.1",
     "@ngrx/store": "^8.0.1",
     "@types/lowdb": "^1.0.9",
     "bootstrap": "^4.3.1",
