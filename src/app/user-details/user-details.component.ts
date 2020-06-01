@@ -27,23 +27,23 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     public actRoute: ActivatedRoute,
     public router: Router,
     private store: Store<AppState>
-    ) { 
-      this.userPosts$ = this.store.select(getPostsState); 
-      this.user$ = this.store.select(getUserState); 
+    ) {
+      this.userPosts$ = this.store.select(getPostsState);
+      this.user$ = this.store.select(getUserState);
   }
-   
+
   onBackButtonClick(): void{
     this.router.navigate(['/users'])
   }
-  
-  ngOnInit() { 
+
+  ngOnInit() {
     this.id = this.actRoute.snapshot.params['id'];
 
     this.store.dispatch(new UserActions.getUserAction(this.id));
     this.subscription = this.user$.subscribe((state:AppState) => {
-      this.user = state;      
+      this.user = state;
     })
-    
+
   this.subscription.unsubscribe();
 
     this.store.dispatch(new UserActions.loadPostsAction(this.id));
@@ -55,5 +55,5 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.subscription.unsubscribe()
   }
- 
+
 }
